@@ -1,0 +1,445 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #fff;
+}
+
+.demo-container {
+  max-width: 1400px;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 56px;
+  margin-bottom: 40px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Network Stage */
+.network-stage {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  overflow: visible;
+}
+
+/* Network Nodes */
+.node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.node img {
+  width: 150px;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.node-label {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  padding: 12px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.node.highlight {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.8));
+}
+
+.node.highlight-danger {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 30px rgba(255, 71, 87, 1));
+}
+
+/* Node Positions */
+.laptop-node {
+  top: 320px;
+  left: 50px;
+}
+
+.wifi-node {
+  top: 220px;
+  left: 50%;
+  margin-left: -75px; /* Half of approximate width for centering */
+}
+
+.server-node {
+  top: 80px;
+  right: 100px;
+}
+
+.server-node.fake {
+  top: 360px;
+  right: 100px;
+}
+
+/* Emoji Icon (Laptop) */
+.emoji-icon {
+  font-size: 150px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+/* WiFi Router */
+.router-icon {
+  font-size: 150px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.danger-badge {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background: linear-gradient(135deg, #ff6348 0%, #ff4757 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 16px;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 6px 24px rgba(255, 71, 87, 0.8);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* WiFi Selector */
+.wifi-selector {
+  position: absolute;
+  top: -120px;
+  left: -50px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-width: 280px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.wifi-selector.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.wifi-network {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 4px 0;
+  border-radius: 8px;
+  background: #f5f5f5;
+  color: #333;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.wifi-network:hover {
+  background: #e0e0e0;
+}
+
+.wifi-network.selected {
+  background: #667eea;
+  color: white;
+  font-weight: bold;
+}
+
+.signal {
+  font-size: 20px;
+}
+
+/* Browser Window */
+.browser-window {
+  position: absolute;
+  top: -240px;
+  left: -100px;
+  width: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.browser-window.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.browser-chrome {
+  background: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+  padding: 12px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.light.red { background: #ff5f56; }
+.light.yellow { background: #ffbd2e; }
+.light.green { background: #27c93f; }
+
+.address-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  font-family: monospace;
+  font-size: 18px;
+  color: #333;
+}
+
+.lock-icon {
+  font-size: 16px;
+}
+
+.url-text {
+  flex: 1;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.browser-content {
+  padding: 20px;
+  min-height: 200px;
+  color: #333;
+}
+
+.login-form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.login-form h2 {
+  color: #1877f2;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.form-button {
+  width: 100%;
+  padding: 12px;
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+/* Connections Layer */
+.connections-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.connection-line {
+  stroke-width: 4;
+  fill: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.connection-line.active {
+  opacity: 1;
+}
+
+/* Animated Packets */
+.packet {
+  position: absolute;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.packet.danger {
+  background: linear-gradient(135deg, #ff6348 0%, #ff4757 100%);
+}
+
+.packet.show {
+  opacity: 1;
+}
+
+/* Packet Animations */
+@keyframes movePacket {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty));
+  }
+}
+
+.packet.animate {
+  animation: movePacket 1.5s ease-in-out forwards;
+}
+
+/* Status Display */
+.status-display {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.status-icon {
+  font-size: 96px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.status-text {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.big-button {
+  padding: 24px 48px;
+  font-size: 32px;
+  font-weight: bold;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.big-button.start {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.big-button.start:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+}
+
+.big-button.start:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.big-button.reset {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.big-button.reset:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .network-stage {
+    height: 500px;
+  }
+
+  .node img {
+    width: 100px;
+  }
+
+  .node-label {
+    font-size: 18px;
+  }
+
+  .browser-window {
+    width: 400px;
+  }
+}

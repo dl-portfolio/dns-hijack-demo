@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS Hijacking - Как хакер крадёт пароли через WiFi</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="demo-container">
+
+    <h1>🏴‍☠️ Как хакер крадёт пароли через WiFi</h1>
+
+    <!-- Network Visualization -->
+    <div class="network-stage">
+
+      <!-- Laptop (User) -->
+      <div class="node laptop-node" id="laptop">
+        <div class="emoji-icon">💻</div>
+        <div class="node-label">Вы</div>
+
+        <!-- WiFi Selection Popup -->
+        <div class="wifi-selector" id="wifiSelector">
+          <div class="wifi-network" data-network="starbucks">
+            <span class="network-name">Starbucks WiFi</span>
+            <span class="signal">⚡⚡⚡</span>
+          </div>
+          <div class="wifi-network" data-network="home">
+            <span class="network-name">Home Network</span>
+            <span class="signal">⚡⚡</span>
+          </div>
+          <div class="wifi-network" data-network="guest">
+            <span class="network-name">Guest WiFi</span>
+            <span class="signal">⚡</span>
+          </div>
+        </div>
+
+        <!-- Browser Window -->
+        <div class="browser-window" id="browserWindow">
+          <div class="browser-chrome">
+            <div class="traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <div class="address-bar">
+              <span class="lock-icon">🔒</span>
+              <span class="url-text" id="urlText"></span>
+              <span class="cursor">|</span>
+            </div>
+          </div>
+          <div class="browser-content" id="browserContent"></div>
+        </div>
+      </div>
+
+      <!-- WiFi Router (Hacker Controlled) -->
+      <div class="node wifi-node" id="wifi">
+        <div class="router-icon">📡</div>
+        <div class="node-label">WiFi Router</div>
+        <div class="danger-badge">☠️ ХАКЕР</div>
+      </div>
+
+      <!-- Real Facebook Server -->
+      <div class="node server-node real" id="realServer">
+        <img src="./images/servers.png" alt="Real Facebook">
+        <div class="node-label">✅ Настоящий Facebook</div>
+      </div>
+
+      <!-- Fake Facebook Server -->
+      <div class="node server-node fake" id="fakeServer">
+        <img src="./images/evil-servers.png" alt="Fake Facebook">
+        <div class="node-label">🚨 ПОДДЕЛЬНЫЙ!</div>
+      </div>
+
+      <!-- Animated Packets/Arrows -->
+      <svg class="connections-layer" id="connectionsLayer">
+        <!-- Connection lines will be drawn here -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#667eea" />
+          </marker>
+          <marker id="arrowhead-danger" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#ff4757" />
+          </marker>
+        </defs>
+      </svg>
+
+      <!-- Data Packets -->
+      <div class="packet" id="packet1">Где Facebook?</div>
+      <div class="packet danger" id="packet2">Ложный адрес!</div>
+      <div class="packet" id="packet3">Соединение</div>
+      <div class="packet danger" id="packet4">
+        📧 Ваш пароль!
+      </div>
+
+    </div>
+
+    <!-- Status Display -->
+    <div class="status-display" id="statusDisplay">
+      <div class="status-icon" id="statusIcon">⏸️</div>
+      <div class="status-text" id="statusText">Нажмите "Запустить" чтобы увидеть атаку</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="startBtn" class="big-button start">▶️ Запустить</button>
+      <button id="resetBtn" class="big-button reset">🔄 Заново</button>
+    </div>
+
+  </div>
+
+  <!-- Anime.js for smooth Motion Canvas-style animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script src="./dns-hijack.js"></script>
+</body>
+</html>
