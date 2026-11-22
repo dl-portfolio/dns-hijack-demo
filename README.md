@@ -4,7 +4,7 @@
 
 A one-screen animated explainer that shows non-technical, Russian-speaking audiences how a rogue public Wi-Fi router can steal a password through DNS hijacking.
 
-This is an independent demo and is not affiliated with Hacksplaining or with any company or brand shown in the animation.
+This is an independent demo and is not affiliated with any company or brand shown in the animation.
 
 It is a static page (HTML, CSS and vanilla JavaScript with [anime.js](https://animejs.com/)) built for live streams and presentations: press one button and the attack plays out in eight steps, with almost no text to read. The on-screen text is in Russian.
 
