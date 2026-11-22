@@ -21,8 +21,8 @@
 
         <!-- WiFi Selection Popup -->
         <div class="wifi-selector" id="wifiSelector">
-          <div class="wifi-network" data-network="starbucks">
-            <span class="network-name">Starbucks WiFi</span>
+          <div class="wifi-network" data-network="cafe">
+            <span class="network-name">Lunabean Café WiFi</span>
             <span class="signal">⚡⚡⚡</span>
           </div>
           <div class="wifi-network" data-network="home">
@@ -44,7 +44,7 @@
               <span class="light green"></span>
             </div>
             <div class="address-bar">
-              <span class="lock-icon">🔒</span>
+              <span class="insecure-badge" id="insecureBadge">⚠️ Не защищено</span>
               <span class="url-text" id="urlText"></span>
               <span class="cursor">|</span>
             </div>
@@ -60,15 +60,15 @@
         <div class="danger-badge">☠️ ХАКЕР</div>
       </div>
 
-      <!-- Real Facebook Server -->
+      <!-- Real Friendora Server -->
       <div class="node server-node real" id="realServer">
-        <img src="./images/servers.png" alt="Real Facebook">
-        <div class="node-label">✅ Настоящий Facebook</div>
+        <img src="./images/servers.png" alt="Real Friendora server">
+        <div class="node-label">✅ Настоящий Friendora</div>
       </div>
 
-      <!-- Fake Facebook Server -->
+      <!-- Fake Friendora Server -->
       <div class="node server-node fake" id="fakeServer">
-        <img src="./images/evil-servers.png" alt="Fake Facebook">
+        <img src="./images/evil-servers.png" alt="Fake Friendora server">
         <div class="node-label">🚨 ПОДДЕЛЬНЫЙ!</div>
       </div>
 
@@ -86,7 +86,7 @@
       </svg>
 
       <!-- Data Packets -->
-      <div class="packet" id="packet1">Где Facebook?</div>
+      <div class="packet" id="packet1">Где Friendora?</div>
       <div class="packet danger" id="packet2">Ложный адрес!</div>
       <div class="packet" id="packet3">Соединение</div>
       <div class="packet danger" id="packet4">
@@ -110,7 +110,9 @@
   </div>
 
   <!-- Anime.js for smooth Motion Canvas-style animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
+          integrity="sha384-/Mc/2ffICYME94wcPOYwoL99IzpbvFsDTty0/5V5t22x2n26tp8JRSsxKjvgZuZs"
+          crossorigin="anonymous"></script>
   <script src="./dns-hijack.js"></script>
 </body>
 </html>

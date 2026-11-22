@@ -233,12 +233,26 @@ h1 {
   color: #333;
 }
 
-.lock-icon {
-  font-size: 16px;
+/* Shown instead of a padlock: a hijacked page arrives over plain http:// */
+.insecure-badge {
+  display: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #d63031;
+  white-space: nowrap;
+}
+
+.insecure-badge.show {
+  display: inline;
 }
 
 .url-text {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cursor {
@@ -262,7 +276,7 @@ h1 {
 }
 
 .login-form h2 {
-  color: #1877f2;
+  color: #6c5ce7;
   text-align: center;
   margin-bottom: 20px;
   font-size: 32px;
@@ -280,7 +294,7 @@ h1 {
 .form-button {
   width: 100%;
   padding: 12px;
-  background: #1877f2;
+  background: #6c5ce7;
   color: white;
   border: none;
   border-radius: 6px;

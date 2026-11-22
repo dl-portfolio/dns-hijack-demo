@@ -9,6 +9,7 @@ const wifiSelector = document.getElementById('wifiSelector');
 const browserWindow = document.getElementById('browserWindow');
 const urlText = document.getElementById('urlText');
 const browserContent = document.getElementById('browserContent');
+const insecureBadge = document.getElementById('insecureBadge');
 
 // Nodes
 const laptop = document.getElementById('laptop');
@@ -90,7 +91,7 @@ async function runDemo() {
   await wait(1000);
 
   // Step 2: WiFi Connected
-  updateStatus('📡', 'Подключились к "Starbucks WiFi" (хакера!)');
+  updateStatus('📡', 'Подключились к "Lunabean Café WiFi" (хакера!)');
 
   anime({
     targets: wifiSelector,
@@ -119,7 +120,7 @@ async function runDemo() {
   await wait(2000);
 
   // Step 3: Browser Opens and URL Typing
-  updateStatus('💻', 'Открываете браузер и вводите facebook.com...');
+  updateStatus('💻', 'Открываете браузер и вводите friendora.example...');
 
   anime({
     targets: wifi,
@@ -150,7 +151,7 @@ async function runDemo() {
   await wait(500);
 
   // Type URL with realistic timing
-  const url = 'facebook.com';
+  const url = 'friendora.example';
   for (let i = 0; i < url.length; i++) {
     urlText.textContent = url.substring(0, i + 1);
     await wait(120);
@@ -159,7 +160,7 @@ async function runDemo() {
   await wait(1500);
 
   // Step 4: DNS Request Packet Animation
-  updateStatus('🔍', 'Ваш ноутбук спрашивает WiFi: "Где Facebook?"');
+  updateStatus('🔍', 'Ваш ноутбук спрашивает WiFi: "Где Friendora?"');
 
   anime({
     targets: laptop,
@@ -233,8 +234,10 @@ async function runDemo() {
 
   await wait(2000);
 
-  // Step 7: Fake Facebook Login Page
-  updateStatus('🎭', 'Вы видите поддельную страницу Facebook...');
+  // Step 7: Fake Friendora Login Page (plain http://, no padlock)
+  updateStatus('🎭', 'Поддельная страница Friendora. Браузер пишет «Не защищено»!');
+  urlText.textContent = 'http://' + url;
+  insecureBadge.classList.add('show');
 
   anime({
     targets: fakeServer,
@@ -254,7 +257,7 @@ async function runDemo() {
   // Show login form with fade-in
   browserContent.innerHTML = `
     <div class="login-form" style="opacity: 0;">
-      <h2>📘 Facebook</h2>
+      <h2>💬 Friendora</h2>
       <input type="text" class="form-input" id="emailInput" value="" readonly>
       <input type="password" class="form-input" id="passwordInput" value="" readonly>
       <button class="form-button">Войти</button>
@@ -459,6 +462,7 @@ function reset() {
 
   // Reset browser
   urlText.textContent = '';
+  insecureBadge.classList.remove('show');
   browserContent.innerHTML = '';
 
   // Reset status
