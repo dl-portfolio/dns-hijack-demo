@@ -1,6 +1,9 @@
 **English** · [Русский](./README.ru.md)
 
-# DNS Hijacking Demo
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner-dark.svg">
+  <img src="docs/assets/banner-light.svg" alt="DNS Hijacking Demo: how a rogue café Wi-Fi router steals a password, in eight animated steps." width="100%">
+</picture>
 
 A one-screen animated explainer that shows non-technical, Russian-speaking audiences how a rogue public Wi-Fi router can steal a password through DNS hijacking.
 
